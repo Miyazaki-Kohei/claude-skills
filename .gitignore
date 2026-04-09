@@ -1,0 +1,9 @@
+output/
+.claude/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+.DS_Store
+ppt-creator-workspace/

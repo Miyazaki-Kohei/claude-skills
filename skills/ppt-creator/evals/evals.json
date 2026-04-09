@@ -1,0 +1,159 @@
+{
+  "skill_name": "ppt-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "SaaS導入の提案資料を10枚で作ってください。audience は情シス部門と経営層、takeaway は「段階的導入で初年度ROI 150%を達成できる」です。tone は断定的でお願いします。",
+      "expected_output": "SCQA フレームワークに基づく10枚の Marp スライド。アクションタイトル、多様なレイアウト、consulting-light テーマ適用。lint 通過。十分な情報量。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "frontmatter_valid",
+          "type": "contains",
+          "description": "フロントマターに marp: true, theme, paginate が含まれる"
+        },
+        {
+          "name": "slide_count",
+          "type": "range",
+          "description": "スライド数が8-12枚の範囲内"
+        },
+        {
+          "name": "action_titles",
+          "type": "check",
+          "description": "全スライドの見出しがアクションタイトル（トピックラベルでない）"
+        },
+        {
+          "name": "layout_classes",
+          "type": "check",
+          "description": "少なくとも3種類以上のレイアウトクラスが使用されている"
+        },
+        {
+          "name": "lint_pass",
+          "type": "check",
+          "description": "lint_deck.py を実行して ERROR が 0 件"
+        },
+        {
+          "name": "scqa_structure",
+          "type": "check",
+          "description": "SCQA の流れ（現状→課題→問い→提案→根拠→次アクション）が識別できる"
+        },
+        {
+          "name": "pptx_exists",
+          "type": "check",
+          "description": "PPTX ファイルが生成されている"
+        },
+        {
+          "name": "content_sufficiency",
+          "type": "check",
+          "description": "各スライドに具体的な数値・データ・根拠が含まれ、ROI 150%の算出根拠、コスト比較、段階的導入のフェーズ詳細が網羅されている"
+        },
+        {
+          "name": "info_density",
+          "type": "range",
+          "description": "デッキ全体の総文字数が3000文字以上（情報が薄すぎないことを確認）"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "AWS vs GCP vs Azure のコスト比較資料を作ってください。技術チームとマネージャー向けで、客観的・データドリブンなトーンで。GitHub Actions の話ではなくクラウドインフラの比較です。",
+      "expected_output": "MECE フレームワークに基づく比較スライド。評価軸定義、各選択肢の分析、VS レイアウト、推奨案。十分なデータ量。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "frontmatter_valid",
+          "type": "contains",
+          "description": "フロントマターに marp: true, theme, paginate が含まれる"
+        },
+        {
+          "name": "comparison_structure",
+          "type": "check",
+          "description": "3つの選択肢（AWS, GCP, Azure）がそれぞれ独立したスライドで分析されている"
+        },
+        {
+          "name": "evaluation_criteria",
+          "type": "check",
+          "description": "コスト比較の評価軸（コンピュート、ストレージ、ネットワーク等）が明示されている"
+        },
+        {
+          "name": "layout_variety",
+          "type": "check",
+          "description": "vs, grid-2, grid-3 などの比較向けレイアウトが使用されている"
+        },
+        {
+          "name": "lint_pass",
+          "type": "check",
+          "description": "lint_deck.py を実行して ERROR が 0 件"
+        },
+        {
+          "name": "pptx_exists",
+          "type": "check",
+          "description": "PPTX ファイルが生成されている"
+        },
+        {
+          "name": "content_sufficiency",
+          "type": "check",
+          "description": "各クラウドの具体的な料金データ、TCO比較、ワークロード別推奨が含まれ、意思決定に十分な情報量がある"
+        },
+        {
+          "name": "info_density",
+          "type": "range",
+          "description": "デッキ全体の総文字数が3000文字以上（情報が薄すぎないことを確認）"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "来月の取締役会向けにDX推進プロジェクトの進捗報告スライドを作ってください。Q3の実績を報告する内容で、KPIは自動化率・コスト削減額・顧客満足度の3つです。リスクが1件あります。",
+      "expected_output": "status-report テンプレートに基づく進捗報告。KPI ボックス、進捗サマリー、リスク対策。consulting-dark テーマ推奨（取締役会向け）。十分な実績データ。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "frontmatter_valid",
+          "type": "contains",
+          "description": "フロントマターに marp: true, theme, paginate が含まれる"
+        },
+        {
+          "name": "slide_count",
+          "type": "range",
+          "description": "スライド数が5-8枚の範囲内（status-report基準）"
+        },
+        {
+          "name": "kpi_slide",
+          "type": "check",
+          "description": "3つのKPI（自動化率・コスト削減額・顧客満足度）が具体的な数値付きで表示されるスライドがある"
+        },
+        {
+          "name": "risk_section",
+          "type": "check",
+          "description": "リスクの内容、影響度、具体的な対策アクションが含まれている"
+        },
+        {
+          "name": "executive_tone",
+          "type": "check",
+          "description": "取締役会向けの適切なトーン（端的、数字重視、意思決定に直結する情報）"
+        },
+        {
+          "name": "lint_pass",
+          "type": "check",
+          "description": "lint_deck.py を実行して ERROR が 0 件"
+        },
+        {
+          "name": "pptx_exists",
+          "type": "check",
+          "description": "PPTX ファイルが生成されている"
+        },
+        {
+          "name": "content_sufficiency",
+          "type": "check",
+          "description": "Q3実績の具体的数値（目標vs実績）、施策の進捗状況、Q4計画が含まれている"
+        },
+        {
+          "name": "info_density",
+          "type": "range",
+          "description": "デッキ全体の総文字数が1500文字以上（6枚想定で十分な情報量があることを確認）"
+        }
+      ]
+    }
+  ]
+}
