@@ -147,15 +147,21 @@ npx @marp-team/marp-cli deck.md --theme-set rector.css --pptx --allow-local-file
 
 `--allow-local-files` はローカル画像の読み込みに必須。
 
-### Step 6: 目視確認
+### Step 6: レイアウト確認（必須）
 
-生成物を1枚ずつ確認し、以下をチェック：
+ビルド後、必ず `/layout-fix` スキルを使ってレイアウトを確認する。このステップは省略しない。
+
+```bash
+npx @marp-team/marp-cli deck.md --theme-set rector.css --images png --allow-local-files
+```
+
+生成されたスクリーンショットを1枚ずつ確認し、以下をチェック：
 - テキストがはみ出していないか
 - 余白が極端に偏っていないか
 - タイトルが結論になっているか（トピックラベルで止まっていないか）
 - 1スライドに論点が2つ以上詰まっていないか
 
-レイアウト崩れが見つかった場合は `/layout-fix` スキルで修正する。
+問題があれば修正し、再度スクリーンショットで確認する。全スライドが OK になるまで繰り返す。
 
 ---
 
