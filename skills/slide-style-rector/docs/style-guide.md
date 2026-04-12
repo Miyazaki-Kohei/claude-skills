@@ -248,3 +248,59 @@ npx @marp-team/marp-cli deck.md --theme-set rector.css --pdf --allow-local-files
 ```
 
 `--allow-local-files` はローカル画像の読み込みに必須。
+
+---
+
+## ビジュアルガイドライン（ergon / svg-creator 連携）
+
+### 使い分け
+
+| ビジュアル種別 | スキル | 出力形式 | 保存先 |
+|--------------|-------|---------|-------|
+| 写真・リアルイラスト | `/ergon` | PNG | `images/` |
+| 図解・ダイアグラム | `/svg-creator` | SVG | `svg/` |
+| アイコン | `/svg-creator` | SVG | `svg/` |
+| 抽象装飾パターン | `/svg-creator` | SVG | `svg/` |
+
+### 画像ガイドライン（ergon 連携）
+
+### スタイル統一のルール
+
+- フラットデザイン（`-t flat`）を基本とする
+- カラーパレットは Navy (#1B4565) + Teal (#3E9BA4) をプロンプトに明示する
+- 背景は白またはライトグレーを基調とする
+- 過度な装飾・テクスチャ・グラデーションを避ける
+
+### 推奨アスペクト比
+
+| 用途 | アスペクト比 | 対応パターン |
+|------|-------------|-------------|
+| スライド全面背景 | 16:9 | Pattern 23 (bg-full) |
+| 右配置背景 | 9:16 または 3:4 | Pattern 24 (bg-right) |
+| カード画像 | 4:3 | Pattern 22 (card) |
+| アイコン的用途 | 1:1 | Pattern 17 (icon list) |
+| 2カラム画像 | 16:9 または 4:3 | Pattern 7a/7b (text+img) |
+
+### ファイル管理
+
+- 保存先: デッキと同じディレクトリの `images/`
+- ファイル名: `<用途>-<内容>.png`（例: `bg-teamwork.png`, `icon-security.png`）
+- ビルド時 `--allow-local-files` フラグが必須
+
+### SVG ガイドライン（svg-creator 連携）
+
+**カラールール:**
+- SVG 内の色はレクターパレットのみ使用（Navy, Teal, グレースケール, 白）
+- 塗りつぶしは `#F9FAFB`（淡い背景）+ `#1B4565`（濃い要素）を基調
+- アクセントは `#3E9BA4` に限定
+
+**デザインルール:**
+- ストローク幅: 1.5-2px で統一
+- 角丸: `rx="8"` を標準とする
+- テキスト: `font-family="system-ui, sans-serif"`
+- viewBox 必須、width/height は指定しない（レスポンシブ）
+
+**保存先と参照:**
+- 保存先: デッキと同じディレクトリの `svg/`
+- ファイル名: 英語3-4語、ケバブケース（例: `data-flow-diagram.svg`）
+- Marp 参照: `<img src="svg/filename.svg">` または `![bg](svg/filename.svg)`
