@@ -1,233 +1,162 @@
-# Marp Advanced Features Reference
+# Marp 高度機能リファレンス
 
-## Directives
+Marp のディレクティブ、画像記法、スコープ付き CSS を活用するためのリファレンス。FJ テーマで頻繁に使うものに絞ってまとめる。
 
-Directives control slide-level and deck-level settings via HTML comments.
+## フロントマター (Global Directives)
 
-### Global Directives (in frontmatter)
 ```yaml
 ---
 marp: true
-theme: consulting-light
-paginate: true
-header: "Company Name"
-footer: "Confidential"
+theme: fj
+paginate: true                # ページ番号を表示
+header: 'プロジェクト名'      # 全スライドに表示するヘッダー
+footer: '© 2026 My Company'   # 全スライドに表示するフッター
+size: 16:9                    # アスペクト比 (FJ は 1920×1080 既定)
+title: デッキタイトル
+description: [資料の説明（1〜2文）]
 ---
 ```
 
-### Scoped Directives (single slide only, use underscore prefix)
+## スライド個別ディレクティブ (Local Directives)
+
+`<!-- _name: value -->` で特定スライドだけに適用する。`_` プレフィックスが「ローカル」を意味する。
+
 ```markdown
-<!-- _class: center -->
-<!-- _backgroundColor: #1a1a2e -->
-<!-- _color: #ffffff -->
-<!-- _header: "" -->
-<!-- _paginate: false -->
+<!-- _class: title -->
+<!-- _paginate: false -->        # このスライドだけページ番号を消す
+<!-- _header: '' -->             # このスライドだけヘッダーを消す
+<!-- _backgroundColor: #eee -->  # このスライドだけ背景色を変える
 ```
 
-Without underscore, a directive applies to the current slide AND all subsequent slides.
+## 画像の拡張記法 (Image Syntax)
 
+Marp の画像記法は alt テキスト内にキーワードを書くことでサイズ・配置・フィルターを制御する。
+
+### サイズ指定
+
+```markdown
+![w:500px](img.png)              # 幅 500px
+![h:300px](img.png)              # 高さ 300px
+![w:500px h:300px](img.png)      # 両方
+![w:50%](img.png)                # 親要素の 50%
+```
+
+### 背景画像
+
+```markdown
+![bg](hero.png)                  # 全面背景
+![bg right](hero.png)            # 右半分に配置
+![bg right:40%](hero.png)        # 右から 40%
+![bg fit](hero.png)              # スライドに収める
+![bg cover](hero.png)            # 埋める (アスペクト比維持)
+![bg blur:5px](hero.png)         # ぼかし
+![bg opacity:.3](hero.png)       # 透明度
+```
+
+### 複数背景 (スプリット)
+
+```markdown
+![bg left](before.png)
+![bg right](after.png)
+```
+
+2 枚が左右に配置される。文字は全面に重なるので背景用の薄い色にすると良い。
+
+### フィルター
+
+```markdown
+![grayscale](img.png)
+![sepia:0.5](img.png)
+![blur:3px](img.png)
+![brightness:1.2 contrast:0.9](img.png)
+```
+
+## スコープ付き CSS (`style` ディレクティブ)
+
+フロントマターの `style:` でテーマを部分的に上書きできる。FJ の見た目を変えるのは極力避けるが、ロゴの差し替えなどに使う。
+
+```markdown
 ---
-
-## Layout Classes
-
-Apply via `<!-- _class: classname -->`:
-- `center` — Centered title/divider
-- `split` — 50/50 two columns
-- `split-right` — 40/60 two columns
-- `grid-2` — Two card columns
-- `grid-3` — Three card columns
-- `vs` — VS comparison
-- `quote` — Large centered message
-- `kpi` — Metric highlight boxes
-
-See `references/layouts.md` for full examples.
-
+marp: true
+theme: fj
+style: |
+  section.title::before {
+    background-image: url('assets/logo.svg');
+  }
 ---
-
-## Image Syntax
-
-### Inline Images
-```markdown
-![w:400](path/to/image.png)
-![w:300 h:200](path/to/image.png)
-```
-- `w:` = width, `h:` = height
-- Supports CSS units: px, em, %, etc.
-
-### Background Images
-```markdown
-![bg](path/to/background.jpg)
-![bg left:40%](path/to/image.jpg)
-![bg right:50%](path/to/image.jpg)
-![bg contain](path/to/image.png)
-![bg fit](path/to/image.png)
 ```
 
-### Image Filters
-```markdown
-![bg blur:5px](image.jpg)
-![bg brightness:0.7](image.jpg)
-![bg opacity:0.3](image.jpg)
-![bg grayscale:1](image.jpg)
-```
-
-Combine filters:
-```markdown
-![bg blur:3px opacity:0.4](image.jpg)
-```
-
----
-
-## Scoped Style Blocks
-
-Override styles for a single slide:
+スライド内でもできる:
 
 ```markdown
-<!-- _class: center -->
-
 <style scoped>
-h1 { color: #e94560; font-size: 48px; }
-p { font-size: 24px; }
+  h1 { letter-spacing: 0.05em; }
 </style>
 
-# Custom styled heading
-
-Smaller subtitle text
+# このスライドだけ文字間隔を広げる
 ```
 
-Scoped styles only apply to the slide they appear on.
+## ページ番号のスキップ
 
----
-
-## Auto-fitting Text
-
-Use the `<!-- fit -->` comment inside a heading to auto-scale text:
+表紙・章扉ではページ番号を出したくないことが多い:
 
 ```markdown
-# <!-- fit --> This long heading will shrink to fit the slide width
-```
-
-Use sparingly — if you need `fit`, the heading is probably too long.
-
----
-
-## Speaker Notes
-
-Speaker notes are HTML comments placed at the end of a slide:
-
-```markdown
-# Slide heading
-
-- Content here
-
-<!--
-Speaker notes:
-- Mention the Q2 data specifically
-- Ask for budget approval
-- Transition to next topic by referencing the timeline
--->
-```
-
-Notes appear in presenter view when using `marp -s` (server mode).
-
----
-
-## Multi-slide Background
-
-Set a background that persists across slides (no underscore):
-
-```markdown
-<!-- backgroundColor: #f5f6fa -->
-```
-
-This applies to the current slide and all following slides until overridden.
-
----
-
-## Header / Footer
-
-```yaml
----
-header: "**Project Alpha** | Strategy Review"
-footer: "Confidential — Internal Use Only"
----
-```
-
-Override per slide:
-```markdown
-<!-- _header: "" -->
-<!-- _footer: "Appendix" -->
-```
-
-Markdown formatting works in headers and footers.
-
----
-
-## Page Numbers
-
-```yaml
----
-paginate: true
----
-```
-
-Hide on specific slides (e.g., title slide):
-```markdown
+<!-- _class: title -->
 <!-- _paginate: false -->
+
+# 表紙
 ```
 
-Style via CSS:
-```css
-section::after {
-  font-size: 14px;
-  color: var(--color-muted);
-}
-```
+## コメント (発表者ノート)
 
----
-
-## Tables
-
-Use standard Markdown tables:
+Marp では HTML コメントのうち、`_` で始まらないものは **発表者ノート** としてエクスポートされる (PPTX・HTML の話者ビュー)。
 
 ```markdown
-| Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
-| Data A   | Data B   | Data C   |
-| Data D   | Data E   | Data F   |
+# あるスライド
+
+本文
+
+<!-- この行は発表者ノートとして PowerPoint のノート欄に入る -->
 ```
 
-Avoid tables wider than 4 columns or deeper than 6 rows — they overflow on slides.
-For complex data, use multiple slides or visual layouts (grid-2, kpi) instead.
+クラス指定などの設定コメントは `<!-- _class: ... -->` のように `_` で始まるので、ノートには混入しない。
 
----
+## 数式 (MathJax)
 
-## Math (KaTeX)
-
-Inline: `$E = mc^2$`
-Block:
 ```markdown
-$$
-\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
-$$
+$$ E = mc^2 $$
+
+インライン: $a^2 + b^2 = c^2$
 ```
 
----
+## コードブロックのシンタックスハイライト
 
-## Exporting
-
-```bash
-# HTML (default, best quality)
-uv run python -m scripts.build decks/my-deck/deck.md --format html
-
-# PDF (requires Chrome/Chromium)
-uv run python -m scripts.build decks/my-deck/deck.md --format pdf
-
-# PPTX (limited CSS support)
-uv run python -m scripts.build decks/my-deck/deck.md --format pptx
-
-# PNG (one image per slide, good for review)
-uv run python -m scripts.build decks/my-deck/deck.md --format png
+```markdown
+```typescript
+const hello: string = 'world'
+```
 ```
 
-HTML and PDF preserve all CSS layouts. PPTX may degrade complex CSS Grid layouts.
+FJ テーマはフォントサイズを自動調整するので、行数が増えても収まる。10 行を超える場合はスクリーンショットにするか、コードを要約することを検討する。
+
+## Mermaid ブロック
+
+```markdown
+```mermaid
+graph TD
+  A[Start] --> B{判断}
+  B -->|Yes| C[処理1]
+  B -->|No| D[処理2]
+```
+```
+
+- **HTML 出力**: `build --with-mermaid` でブラウザ側レンダリング
+- **PPTX 出力**: `scripts.generate_images` で PNG 化してから埋め込む
+- 詳細は `images-and-diagrams.md` 参照
+
+## 参考資料
+
+- Marpit Markdown: https://marpit.marp.app/markdown
+- Image Syntax: https://marpit.marp.app/image-syntax
+- Directives: https://marpit.marp.app/directives
+- Theme CSS: https://marpit.marp.app/theme-css

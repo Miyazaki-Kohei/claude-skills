@@ -7,3 +7,5 @@ __pycache__/
 uv.lock
 .DS_Store
 ppt-creator-workspace/
+sample-images
+slide-imgs

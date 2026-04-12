@@ -7,7 +7,7 @@
 |-------|--------|-----------|
 | All headings are action titles | 10 | -3 per topic-label heading |
 | One message per slide | 5 | -3 per multi-message slide |
-| Within content limits (≤500 chars, ≤7 bullets) | 5 | -3 per violation |
+| Within content limits (≤700 chars, ≤9 bullets) | 5 | -3 per violation |
 | Logical SCQA/Pyramid/MECE structure | 5 | -5 if no framework |
 | Slide count matches request (±2 枚以内) | 5 | -5 if significantly off |
 
@@ -120,26 +120,31 @@
 
 **After (full score, with layout)**
 ```markdown
-<!-- _class: grid-3 -->
+<!-- _class: column-layout -->
 
-# 現状の課題は3つに集約される
+# 現状の課題は **3つ** に集約される
 
-<div>
+<div class="column">
 
-### 工数過多
-手動データ連携に月40時間を消費
-
-</div>
-<div>
-
-### 検知遅延
-エラー検知まで平均4時間のラグ
+## 工数過多
+# **月40h**
+手動データ連携の所要時間
 
 </div>
-<div>
 
-### 拡張限界
-データ量2倍で処理時間が4倍に増加
+<div class="column">
+
+## 検知遅延
+# **4h**
+平均エラー検知ラグ
+
+</div>
+
+<div class="column">
+
+## 拡張限界
+# **×4**
+データ2倍で処理時間が膨張
 
 </div>
 ```
@@ -162,13 +167,14 @@
 ```markdown
 ---
 marp: true
-theme: consulting-light
+theme: fj
 paginate: true
 title: Project Alpha Proposal
 ---
 
-<!-- _class: center -->
+<!-- _class: title -->
+<!-- _paginate: false -->
 
-# Project Alpha Proposal
-2024-12-15 | Strategy Team
+# Project **Alpha** Proposal
+2026-04-10 | Strategy Team
 ```

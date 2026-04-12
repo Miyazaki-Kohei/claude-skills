@@ -4,7 +4,7 @@ import platform
 import shutil
 import subprocess
 
-from .common import available_templates, available_themes
+from .common import THEME_FILE, THEME_NAME
 
 TOOLS = [
     "python",
@@ -35,11 +35,17 @@ def main() -> None:
     print("Tools:")
     for tool in TOOLS:
         print(f"  {tool}: {version(tool)}")
-    print(f"  marp (via npx): run `npx @marp-team/marp-cli --version`")
+    print("  marp (via npx): run `npx @marp-team/marp-cli --version`")
     print()
 
-    print(f"Themes: {', '.join(available_themes())}")
-    print(f"Templates: {', '.join(available_templates())}")
+    theme_status = "present" if THEME_FILE.exists() else "MISSING"
+    print(f"Theme: {THEME_NAME} ({theme_status}) — {THEME_FILE}")
+    print("Scaffold: embedded in scripts/new_deck.py")
+    print()
+
+    print("Optional:")
+    mmdc = shutil.which("mmdc")
+    print(f"  mmdc (mermaid-cli): {mmdc or 'not found — install for PPTX Mermaid rendering'}")
 
 
 if __name__ == "__main__":
