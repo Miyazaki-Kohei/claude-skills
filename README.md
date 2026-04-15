@@ -1,12 +1,26 @@
 # Claude Skills
 
-Claude Code で使用するカスタムスキルのコレクション。
+Claude Code で使用するスライド作成ワークフローのスキルコレクション。
+
+Qiita 記事「[AIエージェントと協働してmarpでスライドを作る2026](https://qiita.com/hirokidaichi/items/243bd176b84900f4cc0d)」のアプローチに基づき、スキルごとに責務を分離した設計。
 
 ## スキル一覧
 
-| スキル | 概要 |
-|--------|------|
-| [ppt-creator](skills/ppt-creator/) | Marp でコンサルティング品質のスライド（PPTX/HTML/PDF）を生成する |
+| スキル | 責務 | トリガー例 |
+|--------|------|-----------|
+| [slide-style-MIYAKOH](skills/slide-style-MIYAKOH/) | 既存 Marp スライドに39種のレイアウトパターンを適用して整形 | `スタイルを整えて` `パターンに合わせて` |
+| [slimg](skills/slimg/) | Google Imagen 4 による画像生成（npm `@miyakoh/slimg`） | `画像を生成` `イラストを作成` |
+| [svg-creator](skills/svg-creator/) | SVG ダイアグラム・アイコン・図解を直接生成 | `フロー図を作って` `アイコンを生成` |
+| [layout-fix](skills/layout-fix/) | Playwright でレンダリングし、レイアウト崩れを検出・修正 | `レイアウト確認` `はみ出し修正` |
+
+## ワークフロー
+
+```
+1. Marp スライドを書く（ユーザー）
+2. /slide-style-MIYAKOH でレイアウト整形（パターン適用 + slimg で画像生成）
+3. /layout-fix でスクリーンショット撮影 → 崩れ修正
+4. 完成（output/ に HTML 出力）
+```
 
 ## セットアップ
 
@@ -14,22 +28,22 @@ Claude Code で使用するカスタムスキルのコレクション。
 uv sync
 ```
 
-各スキルが必要とする外部ツール（Marp CLI など）は、スキルの SKILL.md に記載されています。
+slimg を使う場合は `GEMINI_API_KEY` を `.env` に設定する。
 
 ## ディレクトリ構成
 
 ```
 claude-skills/
-├── skills/           # スキル本体
-│   └── <skill-name>/
-│       ├── SKILL.md      # スキル定義（Claude Code が読み込む）
-│       ├── scripts/      # 補助スクリプト
-│       ├── references/   # 詳細リファレンス
-│       └── ...
-├── output/           # スキルの実行成果物（.gitignore）
+├── skills/
+│   ├── slide-style-MIYAKOH/  # スタイル整形（テーマ、パターン、リファレンス）
+│   ├── slimg/                 # 画像生成
+│   ├── svg-creator/           # SVG 生成
+│   └── layout-fix/            # レイアウト検証・修正
+├── output/                    # 実行成果物（.gitignore）
+├── decks/                     # 作成済みデッキ（.gitignore）
 └── pyproject.toml
 ```
 
 ## スキルの追加
 
-`skills/<skill-name>/SKILL.md` を作成すれば、Claude Code のスキルとして認識されます。
+`skills/<skill-name>/SKILL.md` を作成すれば、Claude Code のスキルとして認識される。

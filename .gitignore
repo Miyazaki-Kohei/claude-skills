@@ -6,8 +6,7 @@ __pycache__/
 *.pyc
 uv.lock
 .DS_Store
-ppt-creator-workspace/
-sample-images
-slide-imgs
+.pytest_cache/
 .env
-decks
+decks/
+slide-imgs/
