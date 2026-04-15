@@ -9,3 +9,5 @@ uv.lock
 ppt-creator-workspace/
 sample-images
 slide-imgs
+.env
+decks
