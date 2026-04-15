@@ -1,8 +1,6 @@
 # Claude Skills
 
-Claude Code で使用するスライド作成ワークフローのスキルコレクション。
-
-Qiita 記事「[AIエージェントと協働してmarpでスライドを作る2026](https://qiita.com/hirokidaichi/items/243bd176b84900f4cc0d)」のアプローチに基づき、スキルごとに責務を分離した設計。
+Claude Code で使用するスライド作成ワークフローのスキルコレクション。スキルごとに責務を分離した設計。
 
 ## スキル一覧
 
