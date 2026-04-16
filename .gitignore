@@ -10,3 +10,4 @@ uv.lock
 .env
 decks/
 slide-imgs/
+*-workspace/
