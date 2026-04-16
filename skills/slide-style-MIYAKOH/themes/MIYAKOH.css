@@ -101,6 +101,15 @@ h1 {
     margin: 0 0 24px 0;
     padding: 0;
 }
+/* Key message: concise one-liner below h1 */
+.key-message {
+    font-size: var(--font-size-xl);
+    color: var(--text-secondary);
+    font-weight: 700;
+    margin-top: -8px;
+    margin-bottom: 16px;
+    padding-left: 2em;
+}
 h2 {
     font-size: var(--font-size-2xl);
     font-weight: 700;
@@ -378,31 +387,32 @@ section.title {
     background-image: var(--gradient-primary);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding: 450px 120px 80px 120px;
+    border-left: 8px solid rgba(255,255,255,0.4);
 }
 section.title::after { display: none; }
 section.title h1 {
     color: var(--white);
-    font-size: 72px;
-    line-height: 1.15;
-    margin-bottom: 32px;
+    font-size: 56px;
+    line-height: 1.2;
+    margin-bottom: 16px;
 }
 section.title h2 {
-    color: rgba(255,255,255,0.85);
-    font-size: 36px;
+    color: rgba(255,255,255,0.8);
+    font-size: 28px;
     font-weight: 400;
     margin: 0;
 }
 section.title p {
     color: rgba(255,255,255,0.6);
-    font-size: var(--font-size-base);
-    margin-top: 16px;
+    font-size: var(--font-size-sm);
+    margin-top: auto;
 }
 section.title h2 + p {
-    margin-top: 48px;
+    margin-top: auto;
 }
 
 /* --- A2: Section Start --- */
