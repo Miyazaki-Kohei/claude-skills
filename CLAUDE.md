@@ -2,82 +2,91 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## プロジェクト概要
 
-Marp スライド作成ワークフローの Claude Code スキルコレクション。スキルごとに責務を分離し、整形・画像生成・レイアウト検証を個別のスキルとして提供する。日本語ユーザー向け。
+Marp ベースのプレゼンテーション作成を自動化する Claude Code スキルコレクション。6つの専門スキルが責務分離された設計で連携する。
 
-## Commands
+## コマンド
 
 ```bash
-# Setup
+# セットアップ
 uv sync
 
-# Build slides to HTML
-npx @marp-team/marp-cli <deck.md> --theme <theme.css> --html true --allow-local-files -o output/deck.html
+# Marp HTML ビルド
+npx @marp-team/marp-cli output/deck.md --html true --theme output/MIYAKOH.css -o output/deck.html
 
-# Generate images (requires GEMINI_API_KEY in .env)
-source .env && export GEMINI_API_KEY && npx @miyakoh/slimg "<prompt>" -t flat -a <ratio> -o <path>
+# Marp PPTX エクスポート
+npx @marp-team/marp-cli output/deck.md --pptx --theme-set output/MIYAKOH.css -o output/deck.pptx
 
-# Layout check (screenshot each slide)
-bash skills/layout-fix/scripts/check-layout.sh <deck.md>
+# 画像生成（GEMINI_API_KEY 必要）
+npx @miyakoh/slimg "<prompt>" -t <style> -a <ratio> -o images/<name>.png
 
-# Run tests
+# レイアウト検証（agent-browser でスクリーンショット撮影）
+bash skills/layout-fix/scripts/check-layout.sh output/deck.md
+bash skills/layout-fix/scripts/cleanup.sh /tmp/marp-layout-XXXXXX
+
+# スライドレビュー（slirev）
+cd output && npx @miyakoh/slirev
+
+# テスト
 uv run pytest
 ```
 
-## Architecture
+**Python パッケージ管理は `uv` を使う。pip は使わない。**
 
-### Skill System
+## アーキテクチャ
 
-各スキルは `skills/<name>/SKILL.md`（YAML frontmatter + Markdown）で定義。Claude Code が自動的にスキルとして認識する。
-
-| Skill | Role |
-|-------|------|
-| **slide-style-MIYAKOH** | 既存 Marp スライドに39種レイアウトパターンを適用して整形（コアスキル） |
-| **slimg** | `@miyakoh/slimg` npm パッケージ経由で Google Imagen 4 による画像生成 |
-| **svg-creator** | SVG ダイアグラム・アイコンを直接生成（API不要） |
-| **layout-fix** | agent-browser でスクリーンショット撮影 → レイアウト崩れ検出・修正 |
-
-### Workflow
+### スキル構成とパイプライン
 
 ```
-Marp スライド（ユーザー作成）
-  → /slide-style-MIYAKOH（パターン適用 + slimg/svg-creator で画像生成）
-  → /layout-fix（スクリーンショット検証 → 崩れ修正）
-  → output/ に HTML 出力
+slide-orchestrator（全工程オーケストレーション）
+  ├→ SubAgent: slide-planner → output/outline.md
+  ├→ SubAgent: slide-style-MIYAKOH → output/deck.md + deck.html
+  │     ├→ /slimg（画像生成）
+  │     └→ /svg-creator（SVG 生成）
+  ├→ SubAgent: layout-fix → output/deck.md（修正済み）
+  └→ slirev でユーザーレビュー → フィードバックループ
 ```
 
-### slide-style-MIYAKOH の構造
+- **slide-planner**: 構成設計のみ（スタイリングしない）。8つのナラティブパターンから選択し `output/outline.md` を出力
+- **slide-style-MIYAKOH**: スタイル整形のみ（コンテンツ変更しない）。39種のレイアウトパターンを適用
+- **layout-fix**: agent-browser でスクリーンショット撮影し視覚的にレイアウト崩れを検出・修正
+- **slimg**: Google Imagen 4 による画像生成。slide-style-MIYAKOH から呼ばれる
+- **svg-creator**: Claude ネイティブの SVG 生成。外部 API 不要
+- **slide-orchestrator**: 上記全スキルを SubAgent で順次実行
 
-このスキルがシステムの中核。参照ファイルの役割を把握すること:
+### ファイルベース連携
 
-- `slides/example.md` — 39種パターンの実装コード。**整形時に必ず参照**してここからコピーする
-- `docs/pattern-reference.md` — パターンの役割・選択ガイド（どのパターンを使うか判断する時）
-- `docs/style-guide.md` — カラー、クラス一覧（デザインルール確認時）
-- `themes/MIYAKOH.css` — テーマCSS。デッキと同じディレクトリにコピーして使う
+スキル間のデータ受け渡しはすべて `output/` ディレクトリのファイル経由。コンテキスト肥大化を防ぐため SubAgent 実行が基本。
 
-### Design System: MIYAKOH
+### 重要な責務境界
 
-- **Colors**: Navy `#1B4565` + Teal `#3E9BA4`、グラデーション: Navy → Teal
-- **Slide size**: 1920×1080
-- **Key CSS classes**: `.key-message`（タイトル下のサブテキスト）、`.source`（出典）、`.panel`、`.stat-box`、`.panel-glass`、`.panel-gradient`
-- **Utility classes**: Tailwind-like（`grid grid-cols-2 gap-6`、`bg-gray-50`、`text-navy`、`rounded-xl` 等）
+- スキルファイル（`skills/` 配下）のデバッグ時のみスキルファイルを修正する。通常のデッキ生成では `output/deck.md` のみ修正し、スキルファイルには触れない
+- ツール・スクリプト・UI をスキルディレクトリにバンドルしない。独立して管理する
 
-## Key Constraints
+### ディレクトリ構成
 
-- パターンは `slides/example.md` の39種から選ぶ。独自レイアウトは作らない
-- 見出しはアクションタイトルにする（「コスト分析」→「ツールAは3年TCOで30%有利」）
-- コロン（：）、感嘆符、装飾的な絵文字を使わない
-- アクセントカラーは1スライド1-2色まで
-- `stat-box accent`（Teal背景）は並列要素で1つだけ強調する場合のみ
-- 同じパターンを3回以上連続で使わない
-- キーメッセージは `<div class="key-message">` タグで記述する（ベタ書き不可）
-- Python パッケージ管理は `uv` を使う（pip 不可）
-- スキルディレクトリ内にツール・スクリプト・UI をバンドルしない。独立した場所に置く
-- output/ 内に成果物を出力する。スキルディレクトリ内に HTML を生成しない
+- `skills/` — スキルの正規ソース（各スキルに `SKILL.md`）
+- `.claude/skills/` — Claude Code が読むスキルファイル（skills/ からコピー/シンボリックリンク）
+- `output/` — ビルド成果物（gitignore）
+- `decks/` — アーカイブ済みデッキ（gitignore）
 
-## External Tools
+### MIYAKOH デザインシステム
 
-- [slirev](https://github.com/Miyazaki-Kohei/slirev) — スライドレビューツール。プレビューとスライド単位のフィードバック管理
-- `@miyakoh/slimg` — 画像生成 npm パッケージ。`GEMINI_API_KEY` 環境変数が必要
-- `agent-browser` — ヘッドレスブラウザでスクリーンショット撮影（layout-fix で使用）
+- **カラー**: Navy `#1B4565`、Teal `#3E9BA4`、9段階グレースケール
+- **タイポグラフィ**: 56px〜18px の8段階、フォントは Helvetica Neue / Hiragino Kaku Gothic ProN
+- **スライドサイズ**: 1920×1080
+- **ユーティリティクラス**: Tailwind 風（grid-cols-N, gap-N, flex, text-xl 等）
+- **テーマ CSS**: `skills/slide-style-MIYAKOH/themes/MIYAKOH.css`
+- **パターンカタログ+使用例**: `skills/slide-style-MIYAKOH/slides/example.md`（39種、選択ガイド+説明コメント付き）
+
+### スライドコンテンツルール
+
+- 見出しはアクション型（「コスト分析」ではなく「ツールAは3年TCOで30%有利」）
+- コロン・感嘆符・装飾絵文字は禁止
+- 1スライド = 1メッセージ、箇条書きは3〜5項目
+- アクセントカラーは1スライドにつき最大1〜2色
+
+## スキルの追加
+
+`skills/<skill-name>/SKILL.md` を作成すれば Claude Code のスキルとして認識される。

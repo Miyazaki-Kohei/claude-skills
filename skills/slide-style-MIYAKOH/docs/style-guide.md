@@ -8,8 +8,6 @@
 |---------|-----|------|
 | Navy | `#1B4565` | タイトル、見出し、重要ラベル |
 | Teal | `#3E9BA4` | アクセント、ボーダー、強調要素 |
-| Navy Light | `#2A5F8F` | 背景、補助色 |
-| Teal Light | `#5BB8C0` | 補助アクセント |
 
 プライマリグラデーション: `linear-gradient(to right, #1B4565, #3E9BA4)`
 用途: タイトル、セクション扉、クロージングの背景。
@@ -51,15 +49,6 @@
 | `--font-size-sm` | 22px | 小テキスト |
 | `--font-size-xs` | 18px | 注釈、出典 |
 
-### em サイズクラス
-
-| クラス | 倍率 | 用途 |
-|-------|------|------|
-| `text-em-3xl` | 2.4em | 数値強調 |
-| `text-em-2xl` | 1.8em | パネル見出し |
-| `text-em-xl` | 1.4em | サブ見出し |
-| `text-em-lg` | 1.2em | 本文 |
-
 ### 文体ルール
 
 - コロン（：）不可 → `原則1 自律性の最大化`
@@ -82,7 +71,6 @@
 | `center-message` | 中央メッセージ（64px） | 白 |
 | `qanda` | Q&A（88px） | gray-50 |
 | `question` | 問いかけ（`_paginate: false` 併用） | グラデーション、白枠 |
-| `compact` | 高密度スライド | フォント縮小 |
 
 ---
 
@@ -124,11 +112,12 @@
 | クラス | 効果 |
 |-------|------|
 | `bg-white` / `bg-gray-50` / `bg-gray-100` | 背景色 |
-| `bg-navy` / `bg-teal` / `bg-gradient` | アクセント背景 |
+| `bg-navy` / `bg-teal` | アクセント背景 |
 | `rounded-lg` / `rounded-xl` / `rounded-2xl` | 角丸 |
 | `shadow` / `shadow-md` / `shadow-lg` | シャドウ |
 | `border-l-4` / `border-t-4` | ボーダー |
-| `border-navy` / `border-teal` / `border-gray-200` | ボーダー色 |
+| `border-navy` / `border-teal` / `border-gray-200` / `border-gray-400` | ボーダー色 |
+| `img-cover` / `img-contain` | 画像フィット（cover / contain） |
 
 ---
 
@@ -160,6 +149,7 @@
 |-------|---------|
 | `v-step` + `data-step="N"` | 縦型ステップ（番号丸） |
 | `step` + `step-number` + `step-content` | 横型ステップ |
+| `step-number.gray` | グレー番号（灰色丸） |
 | `step-arrow` | ステップ間矢印 |
 
 ### タイムライン系
@@ -178,10 +168,8 @@
 | `icon-item` + `icon-circle` | アイコン付きリスト |
 | `maturity-bar` + `maturity-level` | 5段階成熟度バー |
 | `card` + `card-image` | カード型レイアウト |
+| `key-message` | h1直下のサブメッセージ（自動配置） |
 | `source` | 出典（右下固定、18px、gray-400） |
-| `badge` | インラインバッジ |
-| `vs-divider` | VS区切り |
-| `divider` | 水平線 |
 | `attribution` | 引用帰属表示 |
 
 ---
@@ -195,5 +183,5 @@
 | `<!-- _backgroundColor: #hex -->` | 背景色上書き |
 | `<!-- _backgroundImage: "..." -->` | 背景画像/グラデーション |
 | `<!-- _color: white -->` | テキスト色上書き |
-| `![bg right:40%](path)` | Marp背景画像（右40%） |
+| `<!-- _header: "セクション名" -->` | セクションタイトル（コンテンツスライド上部に表示） |
 

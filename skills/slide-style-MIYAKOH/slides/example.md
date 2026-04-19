@@ -2,19 +2,45 @@
 marp: true
 theme: MIYAKOH
 paginate: true
+header: ''
 ---
+
+<!--
+パターン選択ガイド:
+  章の始まり → 2 (section)
+  章のまとめ → 3 (section-end)
+  自己紹介 → 4 (self-intro)
+  2つの比較 → 6 (2col比較) / 38 (対比+結論)
+  3つの並列要素 → 8 (3col) / 9 (3col accent)
+  4つの並列要素 → 10 (4col)
+  段階・成熟度 → 11 (5col maturity)
+  ステップ・プロセス → 14 (v-step) / 15 (横型step)
+  時系列 → 16 (timeline)
+  機能・特徴一覧 → 17 (icon list) / 13 (2x3 grid)
+  画像+テキスト → 7a/7b (2col text+img)
+  製品紹介 → 22 (card) / 18 (panel+image)
+  KPI・数値 → 27 (統計) / 34 (統計比率)
+  重要メッセージ → 28 (center-message)
+  引用 → 25 (quote)
+  問いかけ → 31 (question)
+  まとめ・結論 → 36 (ガラス風) / 38 (対比+結論)
+  データ表 → 39 (table+highlight)
+  QRコード → 30 (QR)
+-->
 
 <!-- _class: title -->
 <!-- _paginate: false -->
 
 # レイアウトパターン スタイルガイド
-## 40種類のMarpレイアウトテンプレート
+## 39種類のMarpレイアウトテンプレート
 
 MIYAKOH (@miyakoh)
 
 ---
 
+<!-- toc — 目次。タイトル直後に使用。項目名15字以内、7項目以内。 -->
 <!-- _class: toc -->
+<!-- _header: '' -->
 
 # 目次
 
@@ -38,7 +64,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 1: Demo タイトルスライド -->
+<!-- Pattern 1: title — 表紙。タイトル1-2行。_paginate: false 併用。 -->
 <!-- _class: title -->
 <!-- _paginate: false -->
 
@@ -49,7 +75,29 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 2: Demo セクション開始 -->
+<!-- Pattern 4: self-intro — 自己紹介。左にテキスト（氏名・役割等）、右にプロフィール画像。項目4-5行。 -->
+
+# 自己紹介
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; flex: 1; margin-top: -112px;">
+<div>
+<p style="font-size: 40px; line-height: 3.4; margin: 0;">
+<strong>氏名</strong>　　MIYAKOH（宮﨑　昂平）<br>
+<strong>業界</strong>　　不動産デベロッパー<br>
+<strong>役割</strong>　　データ分析、データマネジメント<br>
+<strong>趣味</strong>　　キャンプ、筋トレ
+</p>
+</div>
+<div class="flex justify-center">
+<div class="rounded-2xl overflow-hidden" style="width: 560px; height: 560px;">
+<img src="images/profile.jpg" class="img-cover">
+</div>
+</div>
+</div>
+
+---
+
+<!-- Pattern 2: section — 章扉。話題転換を示す。3-5枚に1回。_paginate: false 併用。 -->
 <!-- _class: section -->
 <!-- _paginate: false -->
 
@@ -58,7 +106,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 3: Demo セクション終了・まとめ -->
+<!-- Pattern 3: section-end — セクションまとめ。箇条書き3-5項目で前スライドの要約。新情報は入れない。 -->
 <!-- _class: section-end -->
 
 # セクションのまとめ
@@ -69,7 +117,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 5: Demo クロージング -->
+<!-- Pattern 5: closing — 最終スライド。テキスト3行以内。_paginate: false 併用。 -->
 <!-- _class: closing -->
 <!-- _paginate: false -->
 
@@ -90,14 +138,15 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 6: 2カラム比較 -->
+<!-- Pattern 6: 2col比較 — 2概念を対比。各3-5項目。強調側にTealボーダー（中立比較ならボーダーなし可）。 -->
+<!-- header: 'B. カラムレイアウト系' -->
 
 # 6. 2カラム比較（Before/After）
 
 <div class="key-message">2つの視点を左右に並べて対比する</div>
 
-<div class="grid grid-cols-2 gap-6 mt-6 text-base">
-<div class="bg-gray-50 rounded-xl shadow-lg p-6 border-l-4 border-gray-400">
+<div class="grid grid-cols-2 gap-8 mt-6" style="min-height: 420px;">
+<div class="bg-gray-50 rounded-xl shadow-lg p-10 border-l-4 border-gray-400">
 
 <h3 class="text-xl font-bold mb-4 text-gray-800">期待</h3>
 
@@ -106,7 +155,7 @@ MIYAKOH (@miyakoh)
 - すべてが自動化される
 
 </div>
-<div class="bg-gray-50 rounded-xl shadow-lg p-6 border-l-4 border-teal">
+<div class="bg-gray-50 rounded-xl shadow-lg p-10 border-l-4 border-teal">
 
 <h3 class="text-xl font-bold mb-4 text-gray-800">現実</h3>
 
@@ -119,7 +168,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 7a: 2カラム（テキスト+画像） -->
+<!-- Pattern 7a: 2col（テキスト+画像） — 左テキスト、右画像。50:50基本。 -->
 
 # 7a. 2カラム（テキスト＋画像）
 
@@ -139,14 +188,14 @@ MIYAKOH (@miyakoh)
 </div>
 <div class="rounded-xl overflow-hidden" style="min-height:300px;">
 
-<img src="images/col-project.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/col-project.png" class="img-cover">
 
 </div>
 </div>
 
 ---
 
-<!-- Pattern 7b: 2カラム（画像+テキスト） -->
+<!-- Pattern 7b: 2col（画像+テキスト） — 7aの左右反転。ビジュアル優先時。 -->
 
 # 7b. 2カラム（画像＋テキスト）
 
@@ -155,7 +204,7 @@ MIYAKOH (@miyakoh)
 <div class="grid grid-cols-2 gap-8 mt-6">
 <div class="rounded-xl overflow-hidden" style="min-height:300px;">
 
-<img src="images/col-analysis.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/col-analysis.png" class="img-cover">
 
 </div>
 <div>
@@ -173,7 +222,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 8: 3カラム（画像+テキスト） -->
+<!-- Pattern 8: 3col（画像+テキスト） — 3要素並列。各3-4行。要素は同格。 -->
 
 # 8. 3カラム（画像＋テキスト）
 
@@ -182,7 +231,7 @@ MIYAKOH (@miyakoh)
 <div class="grid grid-cols-3 gap-6 mt-6 text-base">
 <div class="bg-gray-50 rounded-xl shadow-md p-5">
 <div class="rounded-lg mb-4 overflow-hidden" style="height:140px;">
-<img src="images/phase-planning.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/phase-planning.png" class="img-cover">
 </div>
 
 **フェーズ1: 計画**
@@ -192,7 +241,7 @@ MIYAKOH (@miyakoh)
 </div>
 <div class="bg-gray-50 rounded-xl shadow-md p-5">
 <div class="rounded-lg mb-4 overflow-hidden" style="height:140px;">
-<img src="images/phase-development.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/phase-development.png" class="img-cover">
 </div>
 
 **フェーズ2: 実装**
@@ -202,7 +251,7 @@ MIYAKOH (@miyakoh)
 </div>
 <div class="bg-gray-50 rounded-xl shadow-md p-5">
 <div class="rounded-lg mb-4 overflow-hidden" style="height:140px;">
-<img src="images/phase-testing.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/phase-testing.png" class="img-cover">
 </div>
 
 **フェーズ3: 検証**
@@ -214,14 +263,14 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 9: 3カラム（アクセントカラー付き） -->
+<!-- Pattern 9: 3col accent — 3カテゴリをボーダーカラーで区分。色でカテゴリの違いを表現。 -->
 
 # 9. 3カラム（アクセントカラー付き）
 
 <div class="key-message">色分けボーダーで3つのカテゴリを視覚的に区別する</div>
 
-<div class="grid grid-cols-3 gap-6 mt-6 text-base">
-<div class="bg-gray-50 rounded-xl p-6 border-t-4 border-teal">
+<div class="grid grid-cols-3 gap-8 mt-6" style="min-height: 420px;">
+<div class="bg-gray-50 rounded-xl p-8 border-t-4 border-teal">
 
 <h3 class="text-teal font-bold">セキュリティ</h3>
 
@@ -232,7 +281,7 @@ MIYAKOH (@miyakoh)
 - 監査ログ
 
 </div>
-<div class="bg-gray-50 rounded-xl p-6 border-t-4 border-navy">
+<div class="bg-gray-50 rounded-xl p-8 border-t-4 border-navy">
 
 <h3 class="text-navy font-bold">パフォーマンス</h3>
 
@@ -243,7 +292,7 @@ MIYAKOH (@miyakoh)
 - リソース効率
 
 </div>
-<div class="bg-gray-50 rounded-xl p-6 border-t-4" style="border-top-color:#6B7280;">
+<div class="bg-gray-50 rounded-xl p-8 border-t-4" style="border-top-color:#6B7280;">
 
 <h3 class="text-gray-600 font-bold">運用性</h3>
 
@@ -258,14 +307,14 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 10: 4カラムレイアウト -->
+<!-- Pattern 10: 4col — 4要素並列。各2-3行。 -->
 
 # 10. 4カラムレイアウト
 
 <div class="key-message">4つのフェーズや要素を均等に並べて俯瞰する</div>
 
-<div class="grid grid-cols-4 gap-4 mt-6 text-sm">
-<div class="bg-gray-50 rounded-lg shadow-md p-4">
+<div class="grid grid-cols-4 gap-6 mt-6 text-base" style="min-height: 360px;">
+<div class="bg-gray-50 rounded-lg shadow-md p-6">
 
 <h4 class="text-navy font-bold mb-2">Phase 1</h4>
 
@@ -274,7 +323,7 @@ MIYAKOH (@miyakoh)
 ビジネス要件の整理とフィージビリティの検討
 
 </div>
-<div class="bg-gray-50 rounded-lg shadow-md p-4">
+<div class="bg-gray-50 rounded-lg shadow-md p-6">
 
 <h4 class="text-navy font-bold mb-2">Phase 2</h4>
 
@@ -283,7 +332,7 @@ MIYAKOH (@miyakoh)
 アーキテクチャ設計とUI/UXデザイン
 
 </div>
-<div class="bg-gray-50 rounded-lg shadow-md p-4">
+<div class="bg-gray-50 rounded-lg shadow-md p-6">
 
 <h4 class="text-navy font-bold mb-2">Phase 3</h4>
 
@@ -292,7 +341,7 @@ MIYAKOH (@miyakoh)
 スプリントベースの反復開発とCI/CD整備
 
 </div>
-<div class="bg-gray-50 rounded-lg shadow-md p-4">
+<div class="bg-gray-50 rounded-lg shadow-md p-6">
 
 <h4 class="text-navy font-bold mb-2">Phase 4</h4>
 
@@ -305,13 +354,13 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 11: 5カラム（成熟度レベル） -->
+<!-- Pattern 11: 5col maturity — 段階的進化をグラデーション表現。各レベル1-2行。 -->
 
 # 11. 5カラム（成熟度レベル）
 
 <div class="key-message">段階的な進化をグラデーションで表現する</div>
 
-<div class="maturity-bar mt-6">
+<div class="maturity-bar mt-6" style="min-height: 420px;">
 <div class="maturity-level">
 
 <h4>Level 1</h4>
@@ -366,16 +415,16 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 12: 2x2グリッド（画像+テキスト） -->
+<!-- Pattern 12: 2x2 grid — 4要素コンパクト紹介。各セル2-3行。左に小画像120px。 -->
 
 # 12. 2x2グリッド（画像＋テキスト）
 
 <div class="key-message">画像付きカード4枚で機能や要素を一覧する</div>
 
-<div class="grid grid-cols-2 gap-5 mt-4 text-base">
-<div class="bg-gray-50 rounded-xl shadow-md p-5 flex gap-4 items-start">
-<div class="rounded-lg overflow-hidden" style="min-width:100px;height:100px;">
-<img src="images/feat-analytics.png" style="width:100%;height:100%;object-fit:cover;">
+<div class="grid grid-cols-2 gap-8 mt-4 text-lg" style="min-height: 520px;">
+<div class="bg-gray-50 rounded-xl shadow-md p-8 flex gap-8 items-center">
+<div class="rounded-lg overflow-hidden" style="min-width:120px;height:120px;">
+<img src="images/feat-analytics.svg" class="img-contain">
 </div>
 <div>
 
@@ -384,9 +433,9 @@ MIYAKOH (@miyakoh)
 
 </div>
 </div>
-<div class="bg-gray-50 rounded-xl shadow-md p-5 flex gap-4 items-start">
-<div class="rounded-lg overflow-hidden" style="min-width:100px;height:100px;">
-<img src="images/feat-report.png" style="width:100%;height:100%;object-fit:cover;">
+<div class="bg-gray-50 rounded-xl shadow-md p-8 flex gap-8 items-center">
+<div class="rounded-lg overflow-hidden" style="min-width:120px;height:120px;">
+<img src="images/feat-report.svg" class="img-contain">
 </div>
 <div>
 
@@ -395,9 +444,9 @@ MIYAKOH (@miyakoh)
 
 </div>
 </div>
-<div class="bg-gray-50 rounded-xl shadow-md p-5 flex gap-4 items-start">
-<div class="rounded-lg overflow-hidden" style="min-width:100px;height:100px;">
-<img src="images/feat-alert.png" style="width:100%;height:100%;object-fit:cover;">
+<div class="bg-gray-50 rounded-xl shadow-md p-8 flex gap-8 items-center">
+<div class="rounded-lg overflow-hidden" style="min-width:120px;height:120px;">
+<img src="images/feat-alert.svg" class="img-contain">
 </div>
 <div>
 
@@ -406,9 +455,9 @@ MIYAKOH (@miyakoh)
 
 </div>
 </div>
-<div class="bg-gray-50 rounded-xl shadow-md p-5 flex gap-4 items-start">
-<div class="rounded-lg overflow-hidden" style="min-width:100px;height:100px;">
-<img src="images/feat-dashboard.png" style="width:100%;height:100%;object-fit:cover;">
+<div class="bg-gray-50 rounded-xl shadow-md p-8 flex gap-8 items-center">
+<div class="rounded-lg overflow-hidden" style="min-width:120px;height:120px;">
+<img src="images/feat-dashboard.svg" class="img-contain">
 </div>
 <div>
 
@@ -421,49 +470,49 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 13: 2x3グリッドレイアウト -->
+<!-- Pattern 13: 2x3 grid — 6要素整列。上段Teal/下段Navyでフェーズ区分。各2-3行。 -->
 
 # 13. 2x3グリッドレイアウト
 
 <div class="key-message">6つの要素を3列2行のグリッドで整理する</div>
 
-<div class="grid grid-cols-3 gap-4 mt-4 text-sm">
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-teal">
+<div class="grid grid-cols-3 gap-8 mt-4 text-lg" style="min-height: 520px;">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-teal">
 
 **要件定義**
 
 ステークホルダーとの合意形成
 
 </div>
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-teal">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-teal">
 
 **基本設計**
 
 システムアーキテクチャの策定
 
 </div>
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-teal">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-teal">
 
 **詳細設計**
 
 コンポーネント仕様の決定
 
 </div>
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-navy">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-navy">
 
 **実装**
 
 コーディングとユニットテスト
 
 </div>
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-navy">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-navy">
 
 **結合テスト**
 
 システム間連携の検証
 
 </div>
-<div class="bg-gray-50 rounded-lg p-4 border-l-4 border-navy">
+<div class="bg-gray-50 rounded-lg p-10 border-l-4 border-navy">
 
 **リリース**
 
@@ -484,7 +533,8 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 14: 縦3つステップ -->
+<!-- Pattern 14: v-step — 縦3ステップ。各2-3行。4以上はスライド分割。 -->
+<!-- header: 'C. 縦並びリスト系' -->
 
 # 14. 縦3つステップ
 
@@ -522,39 +572,53 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 15: 番号付きステップ（横型） -->
+<!-- Pattern 15: 横型step — 左→右のフロー。3-4ステップ。各1-2行。 -->
 
 # 15. 番号付きステップ（横型）
 
-<div class="key-message">矢印付きの横型ステップで順序を明示する</div>
+<div class="key-message">矢印でプロセスの流れを示す</div>
 
-<div class="grid grid-cols-5 gap-2 mt-8 items-center text-base">
+<div class="grid items-center text-lg" style="grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; min-height: 300px;">
 <div class="step">
-<div class="step-number">1</div>
+<div class="step-number gray">1</div>
 <div class="step-content">
 
-**分析**
-データ収集と課題の特定
+**ステップ1**
+説明文が
+ここに入る
 
 </div>
 </div>
 <div class="step-arrow">→</div>
 <div class="step">
-<div class="step-number teal">2</div>
+<div class="step-number gray">2</div>
 <div class="step-content">
 
-**設計**
-ソリューションの設計
+**ステップ2**
+説明文が
+ここに入る
 
 </div>
 </div>
 <div class="step-arrow">→</div>
 <div class="step">
-<div class="step-number">3</div>
+<div class="step-number gray">3</div>
 <div class="step-content">
 
-**実装**
-開発とテスト
+**ステップ3**
+説明文が
+ここに入る
+
+</div>
+</div>
+<div class="step-arrow">→</div>
+<div class="step">
+<div class="step-number gray">4</div>
+<div class="step-content">
+
+**ステップ4**
+説明文が
+ここに入る
 
 </div>
 </div>
@@ -562,7 +626,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 16: タイムラインレイアウト -->
+<!-- Pattern 16: timeline — 時系列マイルストーン。3-4項目。 -->
 
 # 16. タイムラインレイアウト
 
@@ -603,7 +667,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 17: アイコン付きリスト -->
+<!-- Pattern 17: icon list — Unicodeアイコン付きリスト。3-4項目。太字タイトル+説明文。 -->
 
 # 17. アイコン付きリスト
 
@@ -656,7 +720,8 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 18: 基本パネル（画像ヘッダー付き） -->
+<!-- Pattern 18: panel+image — 画像ヘッダー+テキスト。2枚横並び。3枚ならPattern 22。 -->
+<!-- header: 'D. パネルデザイン系' -->
 
 # 18. 基本パネル（画像ヘッダー付き）
 
@@ -665,7 +730,7 @@ MIYAKOH (@miyakoh)
 <div class="grid grid-cols-2 gap-6 mt-6 text-base">
 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 <div class="overflow-hidden" style="height:160px;">
-<img src="images/panel-product-a.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/panel-product-a.png" class="img-cover">
 </div>
 <div class="p-6">
 
@@ -677,7 +742,7 @@ MIYAKOH (@miyakoh)
 </div>
 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 <div class="overflow-hidden" style="height:160px;">
-<img src="images/panel-product-b.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/panel-product-b.png" class="img-cover">
 </div>
 <div class="p-6">
 
@@ -691,7 +756,7 @@ MIYAKOH (@miyakoh)
 
 ---
 
-<!-- Pattern 19: 強調パネル（左ボーダー付き） -->
+<!-- Pattern 19: panel accent — 左ボーダーで重要度表現。各2-4行。 -->
 
 # 19. 強調パネル（左ボーダー付き）
 
@@ -706,7 +771,7 @@ MIYAKOH (@miyakoh)
 
 </div>
 
-<div class="bg-gray-50 rounded-lg p-6 mb-6" style="border-left:4px solid #1B4565;">
+<div class="bg-gray-50 rounded-lg p-6 mb-6" class="border-l-4 border-navy">
 
 ### 推奨事項
 
@@ -714,7 +779,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 </div>
 
-<div class="bg-gray-50 rounded-lg p-6" style="border-left:4px solid #9CA3AF;">
+<div class="bg-gray-50 rounded-lg p-6" class="border-l-4 border-gray-400">
 
 ### 補足情報
 
@@ -725,7 +790,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 20: Demo ガラス風パネル -->
+<!-- Pattern 20: glass panel — ガラスモーフィズム。_backgroundColor 設定で効果が出る。 -->
 <!-- _backgroundColor: #E8EDF2 -->
 
 # 20. ガラス風パネル
@@ -759,7 +824,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 21: グラデーションパネル -->
+<!-- Pattern 21: gradient panel — Navy→Tealグラデーション。1スライド1つまで。結論やCTAに。 -->
 
 # 21. グラデーションパネル
 
@@ -792,7 +857,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 22: カード型レイアウト（画像付き） -->
+<!-- Pattern 22: card — 3カード横並び。画像+テキスト。各2-3行。 -->
 
 # 22. カード型レイアウト（画像付き）
 
@@ -801,7 +866,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 <div class="grid grid-cols-3 gap-5 mt-6 text-sm">
 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 <div class="overflow-hidden" style="height:130px;">
-<img src="images/card-service-a.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/card-service-a.png" class="img-cover">
 </div>
 <div class="p-5">
 
@@ -813,7 +878,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 </div>
 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 <div class="overflow-hidden" style="height:130px;">
-<img src="images/card-service-b.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/card-service-b.png" class="img-cover">
 </div>
 <div class="p-5">
 
@@ -825,7 +890,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 </div>
 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 <div class="overflow-hidden" style="height:130px;">
-<img src="images/card-service-c.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/card-service-c.png" class="img-cover">
 </div>
 <div class="p-5">
 
@@ -845,11 +910,12 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 <!-- _paginate: false -->
 
 # E. 背景・画像系
-4つの画像パターン
+3つの画像パターン
 
 ---
 
-<!-- Pattern 23: Demo 背景画像全画面 -->
+<!-- Pattern 23: bg-full — 全画面背景。テキスト2行以内。 -->
+<!-- header: 'E. 背景・画像系' -->
 <!-- _class: bg-full -->
 <!-- _backgroundImage: linear-gradient(rgba(27,69,101,0.7), rgba(62,155,164,0.7)), url("images/bg-full-digital.png") -->
 <!-- _backgroundSize: cover -->
@@ -859,22 +925,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 24: Demo 背景画像右側配置 -->
-
-![bg right:40%](images/bg-right-product.png)
-
-# 右側に画像を配置するスライド
-### サブタイトルが入ります
-
-説明テキストが入ります。右側40%に画像を配置し、左側にテキストコンテンツを表示するパターンです。
-
-- ポイント1
-- ポイント2
-- ポイント3
-
----
-
-<!-- Pattern 25: Demo 引用スライド -->
+<!-- Pattern 25: quote — 引用文1-3文。引用元必須。 -->
 <!-- _class: quote -->
 
 > 引用テキストが入ります。印象的な一文を大きく表示して聴衆の注意を引くパターンです
@@ -883,17 +934,18 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 26: Demo 複数画像・分割背景 -->
+<!-- Pattern 26: split images — 複数画像横並び。2-3分割。 -->
 
-<h2 style="margin-bottom: 4px;">26. 複数画像・分割背景</h2>
-<p style="font-size: 28px; font-weight: bold; margin-bottom: 0;">複数の画像を横並びで見せる</p>
+# 26. 複数画像・分割背景
+
+<div class="key-message">複数の画像を横並びで見せる</div>
 
 <div style="display: flex; gap: 24px; margin-top: 24px; flex: 1;">
   <div style="flex: 1; border-radius: 16px; overflow: hidden; min-height: 0;">
-    <img src="images/split-a.png" style="width:100%;height:100%;object-fit:cover;">
+    <img src="images/split-a.png" class="img-cover">
   </div>
   <div style="flex: 1; border-radius: 16px; overflow: hidden; min-height: 0;">
-    <img src="images/split-b.png" style="width:100%;height:100%;object-fit:cover;">
+    <img src="images/split-b.png" class="img-cover">
   </div>
 </div>
 
@@ -909,7 +961,8 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 27: 統計強調スライド -->
+<!-- Pattern 27: 統計 — 数値を大きく表示。2-4項目。.accent は1つだけ強調したい場合のみ。 -->
+<!-- header: 'F. 強調・特殊系' -->
 
 # 27. 統計強調スライド
 
@@ -933,7 +986,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 28: Demo 中央配置メッセージ -->
+<!-- Pattern 28: center-message — 1メッセージを64pxで中央表示。1-2行。 -->
 <!-- _class: center-message -->
 
 # 強調したい
@@ -943,7 +996,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 29: Demo Q&Aスライド -->
+<!-- Pattern 29: Q&A — 質疑応答。_paginate: false 併用。 -->
 <!-- _class: qanda -->
 <!-- _paginate: false -->
 
@@ -962,7 +1015,8 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 30: Demo QRコード付き紹介 -->
+<!-- Pattern 30: QR — QRコード+テキスト。左テキスト、右QRエリア220px。 -->
+<!-- header: 'G. 応用パターン系' -->
 
 # 30. QRコード付き紹介
 
@@ -978,7 +1032,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 31: Demo 問いかけスライド -->
+<!-- Pattern 31: question — 問いかけ。質問は1つ。_paginate: false 併用。 -->
 <!-- _class: question -->
 <!-- _paginate: false -->
 
@@ -986,13 +1040,13 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 32: Demo 脚注引用スライド -->
+<!-- Pattern 32: footnote — 出典付きデータ提示。.source で出典記載。パネル内3-4項目。 -->
 
 # 32. 脚注引用スライド
 
 <div class="key-message">データに基づく主張を出典付きで裏付ける</div>
 
-<div class="grid grid-cols-2 gap-6 mt-4 text-base">
+<div class="grid grid-cols-2 gap-8 mt-4" style="min-height: 380px;">
 <div class="panel">
 
 **定量効果**
@@ -1015,7 +1069,7 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 
 ---
 
-<!-- Pattern 33: インライン画像スライド -->
+<!-- Pattern 33: inline image — テキスト+画像を同じ視線で。アーキテクチャ図解説に。 -->
 
 # 33. インライン画像スライド
 
@@ -1036,34 +1090,34 @@ NavyカラーのボーダーでTealとは異なるカテゴリを表現。アク
 </div>
 <div class="rounded-xl overflow-hidden" style="min-height:320px;">
 
-<img src="images/architecture.png" style="width:100%;height:100%;object-fit:cover;">
+<img src="images/architecture.png" class="img-cover">
 
 </div>
 </div>
 
 ---
 
-<!-- Pattern 34: 統計比率スライド -->
+<!-- Pattern 34: 統計比率 — 4つの比率並列。色で区分。 -->
 
 # 34. 統計比率スライド
 
 <div class="key-message">比率や割合を大きな数字で視覚的に伝える</div>
 
-<div class="grid grid-cols-4 gap-4 mt-8 text-base">
+<div class="grid grid-cols-4 gap-6 mt-8 text-base" style="min-height: 280px;">
 <div class="stat-box">
-<div class="stat-value text-teal" style="font-size:48px;">42%</div>
+<div class="stat-value text-teal">42%</div>
 <div class="stat-label">導入済み</div>
 </div>
 <div class="stat-box">
-<div class="stat-value text-navy" style="font-size:48px;">28%</div>
+<div class="stat-value text-navy">28%</div>
 <div class="stat-label">検討中</div>
 </div>
 <div class="stat-box">
-<div class="stat-value text-gray-600" style="font-size:48px;">18%</div>
+<div class="stat-value text-gray-600">18%</div>
 <div class="stat-label">計画段階</div>
 </div>
 <div class="stat-box">
-<div class="stat-value text-gray-400" style="font-size:48px;">12%</div>
+<div class="stat-value text-gray-400">12%</div>
 <div class="stat-label">未検討</div>
 </div>
 </div>
@@ -1076,7 +1130,7 @@ AI活用の導入ステージ別企業割合（n=500）
 
 ---
 
-<!-- Pattern 35: テキスト＋統計パネル混合 -->
+<!-- Pattern 35: text+stats — 左テキスト+右統計グリッド。.accent は1つまで。 -->
 
 # 35. テキスト＋統計パネル混合
 
@@ -1096,19 +1150,19 @@ AI活用の導入ステージ別企業割合（n=500）
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div class="stat-box">
-<div class="stat-value text-teal" style="font-size:40px;">150%</div>
+<div class="stat-value text-teal" class="text-2xl">150%</div>
 <div class="stat-label">新規顧客</div>
 </div>
 <div class="stat-box">
-<div class="stat-value text-navy" style="font-size:40px;">0.8%</div>
+<div class="stat-value text-navy" class="text-2xl">0.8%</div>
 <div class="stat-label">解約率</div>
 </div>
 <div class="stat-box accent">
-<div class="stat-value" style="font-size:40px;">+15</div>
+<div class="stat-value" class="text-2xl">+15</div>
 <div class="stat-label">NPS</div>
 </div>
 <div class="stat-box">
-<div class="stat-value text-teal" style="font-size:40px;">30%</div>
+<div class="stat-value text-teal" class="text-2xl">30%</div>
 <div class="stat-label">コスト削減</div>
 </div>
 </div>
@@ -1116,13 +1170,13 @@ AI活用の導入ステージ別企業割合（n=500）
 
 ---
 
-<!-- Pattern 36: まとめスライド（ガラス風縦並び） -->
+<!-- Pattern 36: まとめ（ガラス風） — 番号付き3ポイント。プレゼン結論に。各1-2行。 -->
 
 # 36. まとめスライド（ガラス風縦並び）
 
 <div class="key-message">番号付きのガラス風パネルでまとめを提示する</div>
 
-<div class="grid gap-4 mt-4 text-base">
+<div class="grid gap-8 mt-4 text-base">
 <div class="panel-glass flex gap-4 items-center">
 <div class="bg-teal rounded-full flex items-center justify-center text-white font-bold" style="min-width:48px;height:48px;">1</div>
 <div>
@@ -1135,7 +1189,7 @@ AI活用の導入ステージ別企業割合（n=500）
 <div class="bg-teal rounded-full flex items-center justify-center text-white font-bold" style="min-width:48px;height:48px;">2</div>
 <div>
 
-**パターンカタログの構築** — 40種類のレイアウトから最適なものを選択可能にする
+**パターンカタログの構築** — 39種類のレイアウトから最適なものを選択可能にする
 
 </div>
 </div>
@@ -1151,40 +1205,27 @@ AI活用の導入ステージ別企業割合（n=500）
 
 ---
 
-<!-- Pattern 37: シンプルリスト＋補足パネル -->
+<!-- Pattern 37: list+supplement — 箇条書きリスト+下部に補足パネル。 -->
 
 # 37. シンプルリスト＋補足パネル
 
-<div class="key-message">手順リストに補足パネルを添えて詳細を補う</div>
+<div class="key-message">箇条書きに補足情報を添える</div>
 
-<div class="grid gap-6 mt-6 text-base" style="grid-template-columns: 2fr 1fr;">
-<div>
+- リスト項目1がここに入ります。山路を登りながら。
+- リスト項目2がここに入ります。智に働けば角が立つ。
+- リスト項目3がここに入ります。情に棹させば流される。
+- **強調したいリスト項目がここに入ります**
 
-### 導入手順
+<div class="panel mt-6">
 
-1. **環境構築** — 開発環境のセットアップとCI/CDパイプラインの整備
-2. **データ移行** — 既存システムからのデータ移行計画の策定と実行
-3. **機能開発** — コア機能の開発とユニットテストの作成
-4. **統合テスト** — システム全体の結合テストと性能テスト
-5. **本番リリース** — カナリアリリースによる段階的デプロイ
+補足説明文がここに入ります。
+次のアクションへの導入など。
 
-</div>
-<div class="panel" style="background: linear-gradient(135deg, var(--gray-50), var(--gray-100));">
-
-<h4 class="text-teal font-bold mb-3">補足</h4>
-
-各フェーズの所要期間は規模により異なります
-
-- 小規模: 2-4週間
-- 中規模: 1-3ヶ月
-- 大規模: 3-6ヶ月
-
-</div>
 </div>
 
 ---
 
-<!-- Pattern 38: 対比＋結論スライド -->
+<!-- Pattern 38: 対比+結論 — 2パネル比較+下部に結論帯。強調側にTealボーダー（中立比較ならボーダーなし可）。結論1-2行。 -->
 
 # 38. 対比＋結論スライド
 
@@ -1221,7 +1262,7 @@ AI活用の導入ステージ別企業割合（n=500）
 
 ---
 
-<!-- Pattern 39: テーブル+ハイライト -->
+<!-- Pattern 39: table+highlight — 比較表。推奨列を太字。列4つ以内、行6-8以内。 -->
 
 # 39. テーブル＋ハイライト
 

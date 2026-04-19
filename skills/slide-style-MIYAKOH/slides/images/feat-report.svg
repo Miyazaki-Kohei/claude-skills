@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <title>レポート生成</title>
+  <desc>ドキュメントとチェックマークのアイコン</desc>
+  <rect width="120" height="120" rx="12" fill="#F9FAFB"/>
+  <rect x="28" y="16" width="56" height="72" rx="6" fill="none" stroke="#1B4565" stroke-width="2"/>
+  <line x1="38" y1="32" x2="74" y2="32" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="44" x2="74" y2="44" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="56" x2="60" y2="56" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="68" x2="54" y2="68" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="82" cy="80" r="22" fill="#3E9BA4"/>
+  <polyline points="72,80 79,87 93,73" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

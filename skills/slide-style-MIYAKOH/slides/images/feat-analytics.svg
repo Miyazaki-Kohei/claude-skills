@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <title>データ分析</title>
+  <desc>棒グラフと虫眼鏡のアイコン</desc>
+  <rect width="120" height="120" rx="12" fill="#F9FAFB"/>
+  <rect x="20" y="70" width="16" height="30" rx="3" fill="#E5E7EB"/>
+  <rect x="42" y="50" width="16" height="50" rx="3" fill="#1B4565"/>
+  <rect x="64" y="35" width="16" height="65" rx="3" fill="#3E9BA4"/>
+  <circle cx="88" cy="42" r="16" fill="none" stroke="#1B4565" stroke-width="2"/>
+  <line x1="100" y1="54" x2="108" y2="62" stroke="#1B4565" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="100" x2="80" y2="100" stroke="#E5E7EB" stroke-width="1.5"/>
+</svg>
